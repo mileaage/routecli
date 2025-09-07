@@ -1,0 +1,11 @@
+routes:
+  - "/"
+  - "/data"
+  - "/videos"
+  - "/yo"
+  - "/sandro"
+
+templates: []
+
+middlewares:
+  - "logger"
