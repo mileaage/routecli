@@ -10,16 +10,16 @@ import (
 
 var ErrInvalidRoute = errors.New("invalid route")
 
-func LoadRoutes(routes []string) *http.ServeMux {
+func LoadRoutes(routes []Route) *http.ServeMux {
 	mux := http.NewServeMux()
 
 	for _, route := range routes {
 		log.Printf("Loading route for %s\n", route)
-		mux.HandleFunc(strings.Join([]string{"GET ", route}, ""), func(w http.ResponseWriter, r *http.Request) {
-			if route == "/" {
-				route = "/home page!"
+		mux.HandleFunc(strings.Join([]string{"GET ", route.Path}, ""), func(w http.ResponseWriter, r *http.Request) {
+			if route.Path == "/" {
+				route.Path = "/home page!"
 			}
-			fmt.Fprintf(w, "Route for %s", route[1:])
+			fmt.Fprintf(w, "Route for %s", route.Path[1:])
 		})
 	}
 
@@ -31,7 +31,7 @@ func AddRoute(route string) error {
 		return ErrInvalidRoute
 	}
 
-	err := AddToRoutes(route)
+	err := AddToRoutes(route, "default")
 	if err != nil {
 		return err
 	}

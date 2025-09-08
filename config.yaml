@@ -1,11 +1,22 @@
 routes:
-  - "/"
-  - "/data"
-  - "/videos"
-  - "/yo"
-  - "/sandro"
+  - path: "/"
+    template: "home"
+  - path: "/data"
+    template: "data-dashboard"
+  - path: "/videos"
+    template: "video-list"
+  - path: "/yo"
+    template: "greeting"
+  - path: "/sandro"
+    template: "profile"
 
-templates: []
+templates: 
+  - "home"
+  - "data-dashboard"
+  - "video-list"
+  - "greeting"
+  - "profile"
+  - "default"
 
 middlewares:
   - "logger"
