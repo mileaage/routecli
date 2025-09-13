@@ -3,20 +3,20 @@ routes:
     template: "home"
   - path: "/data"
     template: "data-dashboard"
-  - path: "/videos"
-    template: "video-list"
-  - path: "/yo"
-    template: "greeting"
-  - path: "/sandro"
-    template: "profile"
 
 templates: 
   - "home"
   - "data-dashboard"
-  - "video-list"
-  - "greeting"
-  - "profile"
-  - "default"
+
+template_data:
+  - name: "home"
+    data:
+      title: "Home"
+      hero_text: "Welcome to our site"
+  - name: "data-dashboard"
+    data:
+      chart_type: "line"
+      data_source: "analytics_db"
 
 middlewares:
   - "logger"

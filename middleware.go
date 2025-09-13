@@ -27,8 +27,7 @@ func NewLogger(handlerToWrap http.Handler) *Logger {
   - Add auth
   - Add cors
 */
-func AttachMiddlewares(mux *http.ServeMux, middlewares []string) http.Handler {
-	var handler http.Handler = mux
+func AttachMiddlewares(handler http.Handler, middlewares []string) http.Handler {
 
 	for _, middleware := range middlewares {
 		switch middleware {
