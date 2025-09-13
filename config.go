@@ -261,7 +261,7 @@ func GetTemplateForRoute(path string) (string, error) {
 }
 
 // GetTemplateAndDataForRoute returns both template name and its data for a given route
-func GetTemplateAndDataForRoute(path string) (string, map[string]interface{}, error) {
+func GetTemplateAndDataForRoute(path string) (string, map[string]any, error) {
 	templateName, err := GetTemplateForRoute(path)
 	if err != nil {
 		return "", nil, err
@@ -270,7 +270,7 @@ func GetTemplateAndDataForRoute(path string) (string, map[string]interface{}, er
 	templateData, err := GetTemplateData(templateName)
 	if err != nil {
 		// Return template name even if data doesn't exist
-		return templateName, make(map[string]interface{}), nil
+		return templateName, make(map[string]any), nil
 	}
 
 	return templateName, templateData, nil

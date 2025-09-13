@@ -12,7 +12,7 @@ template_data:
   - name: "home"
     data:
       title: "Home"
-      hero_text: "Welcome to our site"
+      hero_text: "Welcome to the best website ever"
   - name: "data-dashboard"
     data:
       chart_type: "line"

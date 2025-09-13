@@ -11,9 +11,11 @@ var ErrInvalidRoute = errors.New("invalid route")
 func LoadRoutes(routes []Route) *http.ServeMux {
 	mux := http.NewServeMux()
 
+	// Serve the static files
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+
 	for _, route := range routes {
 		// avoid closures
-
 		log.Printf("Loading route for %s with template %s\n", route.Path, route.Template)
 
 		// Create a handler
@@ -58,8 +60,8 @@ func createRouteHandler(route Route) http.HandlerFunc {
 		templateData, err := GetTemplateData(route.Template)
 		if err != nil {
 			log.Printf("Template data error for %s: %v\n", route.Template, err)
-			// Don't error out if template data doesn't exist, just use empty map
-			templateData = make(map[string]any)
+			// if template data doesnt exist, return
+			return
 		}
 
 		err = templateFile.Execute(w, templateData)

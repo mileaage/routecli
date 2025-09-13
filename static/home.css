@@ -1,0 +1,8 @@
+.center-headers h1,
+.center-headers h2,
+.center-headers h3,
+.center-headers h4,
+.center-headers h5,
+.center-headers h6 {
+    text-align: center;
+}
