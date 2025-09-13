@@ -29,14 +29,7 @@ func LoadRoutes(routes []Route) *http.ServeMux {
 // create a handler for closures
 func createRouteHandler(route Route) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// check exact url path instead
-		if r.URL.Path != route.Path {
-			// root handler
-			if route.Path == "/" {
-				http.NotFound(w, r)
-				return
-			}
-			// not found
+		if route.Path != r.URL.Path {
 			http.NotFound(w, r)
 			return
 		}
