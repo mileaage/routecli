@@ -182,7 +182,24 @@ func GetTemplateData(templateName string) (map[string]any, error) {
 
 	for _, td := range config.TemplateData {
 		if td.Name == templateName {
+
+			if td.Name == "home" {
+				links := []string{}
+				for _, route := range config.Routes {
+					if len(route.Path) > 1 {
+						links = append(links, route.Path[1:]) // omit first character
+					} else {
+						links = append(links, "") // handle "/"
+					}
+				}
+
+				td.Data["AvailableLinks"] = links
+
+				return td.Data, nil
+			}
+
 			return td.Data, nil
+
 		}
 	}
 
