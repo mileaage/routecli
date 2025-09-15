@@ -115,7 +115,7 @@ func AddTemplate(name string) error {
 
 	config.Templates = append(config.Templates, name)
 
-	// Auto-add template data entry if not already there
+	// add it
 	if !hasTemplateData(config.TemplateData, name) {
 		config.TemplateData = append(config.TemplateData, TemplateData{
 			Name: name,
