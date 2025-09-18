@@ -2,14 +2,15 @@
 <html>
     <head>
         <title>{{.title}}</title>
-    <link href="/static/home.css" rel="stylesheet">
+        <link href="/static/home.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/tailwind.css" />
     </head>
-    <body>
-        <div class="center-headers">
-            <h1>{{.hero_text}}</h1>
-            <nav>
+    <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+        <div class="center-headers w-full max-w-xl mx-auto text-center p-8 bg-white rounded shadow">
+            <h1 class="text-4xl font-bold text-blue-600 mb-6">{{.hero_text}}</h1>
+            <nav class="flex flex-wrap gap-4 justify-center">
                 {{range .AvailableLinks}}
-                    <a href="{{.}}">{{.}}</a>
+                    <a href="{{.}}" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition">{{.}}</a>
                 {{end}}
             </nav>
         </div>

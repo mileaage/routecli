@@ -3,3 +3,6 @@ data
 
 *.txt
 *.exe
+
+static/css/tailwind.css
+static/output.css

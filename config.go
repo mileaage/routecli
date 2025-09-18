@@ -188,8 +188,6 @@ func GetTemplateData(templateName string) (map[string]any, error) {
 				for _, route := range config.Routes {
 					if len(route.Path) > 1 {
 						links = append(links, route.Path[1:]) // omit first character
-					} else {
-						links = append(links, "") // handle "/"
 					}
 				}
 

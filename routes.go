@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"errors"
 	"log"
 	"net/http"
@@ -8,11 +9,18 @@ import (
 
 var ErrInvalidRoute = errors.New("invalid route")
 
+//go:embed static
+var static embed.FS
+
+//go:generate npm run build
+
 func LoadRoutes(routes []Route) *http.ServeMux {
 	mux := http.NewServeMux()
 
+	mux.Handle("/static/", http.FileServer(http.FS(static)))
+
 	// Serve the static files
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	// mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
 	for _, route := range routes {
 		// avoid closures
@@ -89,7 +97,7 @@ func StartRoutes() error {
 
 	mux := LoadRoutes(config.Routes)
 
-	// return 404 for  routes
+	// return 404 for routes
 	notFoundMux := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		handler, pattern := mux.Handler(r)
 		log.Printf("Request %s -> Handler pattern: '%s'\n", r.URL.Path, pattern)
